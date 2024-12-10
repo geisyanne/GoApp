@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">GoApp</string>
-    <string name="hint_name">Digite seu nome</string>
+
+    <string name="hint_name">ID do cliente</string>
     <string name="hint_origin_address">Endereço de origem</string>
     <string name="hint_destination_address">Endereço de destino</string>
+
+    <string name="error_origin_not_provided">Informe o endereço de origem</string>
+    <string name="error_destination_not_provided">Informe o endereço de destino</string>
+    <string name="error_customer_id_not_provided">Informe o ID do cliente</string>
+    <string name="error_destination_equals_origin">O endereço de destino está igual ao de origem</string>
+
+    <string name="error_server">Problema ao se conectar com o servidor. Tente novamente.</string>
+    <string name="error_network">Sem conexão com a internet. Verifique sua rede.</string>
+    <string name="error_invalid_response">Resposta inválida do servidor. Tente novamente.</string>
+
+    <string name="error_generic">Ocorreu um erro. Por favor, tente novamente.</string>
+
+
 </resources>

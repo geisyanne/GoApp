@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "679355534036",
+    "project_id": "goapp-80345",
+    "storage_bucket": "goapp-80345.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679355534036:android:682e2ea6f83caf9ec30941",
+        "android_client_info": {
+          "package_name": "com.geisyanne.goapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtx53Hy-2jpGbEHpfUIDPS-_wjxzMCpjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,14 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
-    namespace = "co.geisyanne.goapp"
+    namespace = "com.geisyanne.goapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "co.geisyanne.goapp"
+        applicationId = "com.geisyanne.goapp"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -61,9 +63,20 @@ dependencies {
     implementation(platform(libs.okhttp.bom))
     implementation(libs.logging.interceptor)
 
-    //Koin
+    // Koin
     implementation(libs.koin)
 
+    // Lifecycle e ViewModel
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.runtime)
 
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 
 }
