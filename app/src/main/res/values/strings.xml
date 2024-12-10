@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GoApp</string>
+    <string name="hint_name">Digite seu nome</string>
+    <string name="hint_origin_address">Endereço de origem</string>
+    <string name="hint_destination_address">Endereço de destino</string>
 </resources>
