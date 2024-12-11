@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txt_driver_item_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Motorista"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_desc_item_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descrição"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_vehicle_item_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veículo"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_rating_item_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avaliação: 4.5"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_value_item_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 35,00"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_choose_item_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escolher" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/travelRequestFragment">
+
+    <fragment
+        android:id="@+id/travelRequestFragment"
+        android:name="com.geisyanne.goapp.ui.features.travelRequest.TravelRequestFragment"
+        android:label="Solicitação de Viagem">
+        <action
+            android:id="@+id/action_travelRequestFragment_to_travelOptionsFragment"
+            app:destination="@id/travelOptionsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/travelOptionsFragment"
+        android:name="com.geisyanne.goapp.ui.features.travelOptions.TravelOptionsFragment"
+        android:label="Detalhes da Viagem">
+    </fragment>
+
+
+
+</navigation>

@@ -1,15 +1,17 @@
 package com.geisyanne.goapp.ui.features.travelRequest
 
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.geisyanne.goapp.domain.model.RideEstimateModel
 import com.geisyanne.goapp.domain.usecase.GetRideEstimateUseCase
 import com.geisyanne.goapp.domain.usecase.RideEstimateResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 
 class TravelRequestViewModel(
-    private val getRideEstimateUseCase: GetRideEstimateUseCase
+    private val getRideEstimateUseCase: GetRideEstimateUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<TravelRequestState>(TravelRequestState.Idle)
@@ -25,6 +27,7 @@ class TravelRequestViewModel(
                     _uiState.value = TravelRequestState.Success(result)
                 }
                 is RideEstimateResult.Failure -> {
+                    Log.d("TravelRequestViewModel", "Failure: ${result.resId}")
                     _uiState.value = TravelRequestState.Error(result.resId)
                 }
             }

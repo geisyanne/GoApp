@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.geisyanne.goapp" />
+                  <option name="mobileSdkAppId" value="1:679355534036:android:682e2ea6f83caf9ec30941" />
+                  <option name="projectId" value="goapp-80345" />
+                  <option name="projectNumber" value="679355534036" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

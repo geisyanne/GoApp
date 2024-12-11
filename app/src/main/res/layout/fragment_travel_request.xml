@@ -30,19 +30,21 @@
                 android:hint="@string/hint_name"
                 android:inputType="textPersonName" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/edit_origin_request"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:autofillHints="name"
+                android:completionThreshold="1"
                 android:hint="@string/hint_origin_address"
                 android:inputType="textPersonName" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/edit_destination_request"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:autofillHints="name"
+                android:completionThreshold="1"
                 android:hint="@string/hint_destination_address"
                 android:inputType="textPersonName" />
 
