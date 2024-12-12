@@ -39,5 +39,5 @@ sealed class TravelRequestState {
     data object Idle : TravelRequestState()
     data object Loading : TravelRequestState()
     data class Success(val rideEstimate: RideEstimateResult) : TravelRequestState()
-    data class Error(val resId: Int) : TravelRequestState()
+    data class Error(val resId: String?) : TravelRequestState()
 }

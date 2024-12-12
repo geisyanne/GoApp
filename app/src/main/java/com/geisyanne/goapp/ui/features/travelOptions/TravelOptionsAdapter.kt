@@ -7,9 +7,10 @@ import com.geisyanne.goapp.databinding.ItemRvTravelOptionsBinding
 import com.geisyanne.goapp.domain.model.RideOptionModel
 
 class TravelOptionsAdapter(
-    private var rideOptions: List<RideOptionModel> = emptyList(),
     private val onItemClick: (RideOptionModel) -> Unit
     ) : RecyclerView.Adapter<TravelOptionsAdapter.TravelOptionsHolder>() {
+
+    private var rideOptions: List<RideOptionModel> = emptyList()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelOptionsHolder {
             val binding = ItemRvTravelOptionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)

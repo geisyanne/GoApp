@@ -4,10 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.geisyanne.goapp.databinding.ActivityMainBinding
 import com.geisyanne.goapp.R
-
-import com.geisyanne.goapp.ui.features.travelRequest.TravelRequestFragment
+import com.geisyanne.goapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

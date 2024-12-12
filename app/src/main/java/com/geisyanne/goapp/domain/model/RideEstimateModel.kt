@@ -27,3 +27,9 @@ data class ReviewModel(
     val rating: Int?,
     val comment: String?
 )
+
+data class TravelRequestData(
+    val customerId: String,
+    val origin: String,
+    val destination: String
+)

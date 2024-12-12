@@ -18,6 +18,8 @@
 
     <string name="choose_trip">Escolha a viagem</string>
     <string name="empty_list_options">Nenhum motorista disponível agora.\nTente novamente em breve!</string>
+    <string name="ride_confirm">Viagem Confirmada</string>
+    <string name="search_ride">Procurar motorista</string>
 
 
 </resources>

@@ -20,6 +20,8 @@ class TravelRequestFragment : Fragment(R.layout.fragment_travel_request) {
     private var _binding: FragmentTravelRequestBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var customerId: String
+
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val travelRequestViewModel: TravelRequestViewModel by viewModel()
 
@@ -32,6 +34,7 @@ class TravelRequestFragment : Fragment(R.layout.fragment_travel_request) {
         observeViewModel()
     }
 
+    // PARA TESTES
     private fun setupAutoCompleteTextViews() {
         val addressOrigin = listOf(
             "Av. Pres. Kenedy, 2385 - Remédios, Osasco - SP, 02675-031",
@@ -39,12 +42,9 @@ class TravelRequestFragment : Fragment(R.layout.fragment_travel_request) {
             "Av. Brasil, 2033 - Jardim America, São Paulo - SP, 01431-001"
         )
         val addressDestination = listOf(
-            "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
-            "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
             "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200"
         )
 
-        // Criando adaptadores
         val originAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
@@ -56,7 +56,6 @@ class TravelRequestFragment : Fragment(R.layout.fragment_travel_request) {
             addressDestination
         )
 
-        // Associando adaptadores aos AutoCompleteTextViews
         binding.editOriginRequest.setAdapter(originAdapter)
         binding.editDestinationRequest.setAdapter(destinationAdapter)
     }
@@ -67,6 +66,7 @@ class TravelRequestFragment : Fragment(R.layout.fragment_travel_request) {
             val origin = binding.editOriginRequest.text.toString()
             val destination = binding.editDestinationRequest.text.toString()
 
+            sharedViewModel.setTravelRequestData(customerId, origin, destination)
             travelRequestViewModel.getRideEstimate(customerId, origin, destination)
         }
     }
@@ -92,7 +92,7 @@ class TravelRequestFragment : Fragment(R.layout.fragment_travel_request) {
                     is TravelRequestState.Error -> {
                         binding.progressRequest.visibility = View.GONE
                         sharedViewModel.clearRideEstimate()
-                        val errorMessage = getString(state.resId)
+                        val errorMessage = state.resId
                         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
