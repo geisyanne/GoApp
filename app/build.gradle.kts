@@ -39,6 +39,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
 }
@@ -83,5 +84,12 @@ dependencies {
     // Navigation
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Maps
+    implementation(libs.google.maps)
+
+    // Glide
+    implementation(libs.glide)
+    implementation(libs.glide.processor)
 
 }

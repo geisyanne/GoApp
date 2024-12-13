@@ -17,7 +17,9 @@ coroutines = "1.7.3"
 lifecycle = "2.8.7"
 firebase-bom = "33.7.0"
 firebase-crashlytics = "3.0.2"
-navigation = "2.8.4"
+navigation = "2.8.5"
+maps = "19.0.0"
+glide = "4.13.2"
 
 
 
@@ -60,6 +62,13 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 # Navigation
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+# Maps
+google-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "maps" }
+
+# Glide
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-processor = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 
 
 

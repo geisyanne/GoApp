@@ -1,19 +1,20 @@
 package com.geisyanne.goapp.ui.features.travelOptions
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.geisyanne.goapp.R
 import com.geisyanne.goapp.databinding.FragmentTravelOptionsBinding
+import com.geisyanne.goapp.domain.model.LocationModel
 import com.geisyanne.goapp.domain.model.RideOptionModel
+import com.geisyanne.goapp.domain.model.RouteModel
 import com.geisyanne.goapp.domain.usecase.RideEstimateResult
 import com.geisyanne.goapp.ui.SharedViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TravelOptionsFragment : Fragment(R.layout.fragment_travel_options) {
@@ -46,15 +47,56 @@ class TravelOptionsFragment : Fragment(R.layout.fragment_travel_options) {
     }
 
     private fun populateRideOptions() {
-        Log.d("TravelOptionsFragment", "RideEstimate: ${sharedViewModel.getRideEstimate()}")
         val rideEstimate = sharedViewModel.getRideEstimate()
         if (rideEstimate is RideEstimateResult.Success) {
             val rideOptions = rideEstimate.rideEstimate.options.orEmpty()
+
+            setupStaticMapView(rideEstimate.rideEstimate.routeModel)
+
             adapter.updateData(rideOptions)
             updateVisibility(rideOptions)
         } else {
             updateVisibility(emptyList())
         }
+    }
+
+    private fun setupStaticMapView(routeModel: RouteModel?) {
+        if (routeModel != null) {
+            val origin =
+                routeModel.routes?.firstOrNull()?.legs?.firstOrNull()?.startLocation?.latLng
+            val destination =
+                routeModel.routes?.firstOrNull()?.legs?.firstOrNull()?.endLocation?.latLng
+
+            if (origin != null && destination != null) {
+                val url = buildStaticMapUrl(origin, destination, routeModel)
+
+                loadStaticMap(url)
+            }
+        }
+    }
+
+    private fun buildStaticMapUrl(
+        origin: LocationModel,
+        destination: LocationModel,
+        routeModel: RouteModel
+    ): String {
+        val originLatLng = "${origin.latitude},${origin.longitude}"
+        val destinationLatLng = "${destination.latitude},${destination.longitude}"
+        val polyline = routeModel.routes?.firstOrNull()?.polyline?.encodedPolyline ?: ""
+        val zoom = 10
+        val markers = "markers=$originLatLng&markers=$destinationLatLng"
+        val path = "path=weight:3|color:blue|enc:$polyline"
+        val key = "key=${getString(R.string.maps_api_key)}"
+
+        return "https://maps.googleapis.com/maps/api/staticmap?center=$originLatLng&zoom=$zoom&size=600x300&$markers&$path&$key"
+    }
+
+    private fun loadStaticMap(url: String) {
+        Glide.with(requireContext())
+            .load(url)
+            .error(R.drawable.placeholder_map)
+            .placeholder(R.drawable.placeholder_map)
+            .into(binding.imgMapOptions)
     }
 
     private fun updateVisibility(rideOptions: List<RideOptionModel>) {
@@ -64,7 +106,6 @@ class TravelOptionsFragment : Fragment(R.layout.fragment_travel_options) {
     }
 
     private fun onRideOptionSelected(selectedRideOption: RideOptionModel) {
-
         val travelRequestData = sharedViewModel.getTravelRequestData()
         if (travelRequestData != null) {
             val customerId = travelRequestData.customerId
@@ -92,53 +133,39 @@ class TravelOptionsFragment : Fragment(R.layout.fragment_travel_options) {
                 )
             }
         }
-
-
-        Toast.makeText(
-            requireContext(),
-            "Você escolheu: ${selectedRideOption.name}",
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     private fun observeViewModel() {
-
-        lifecycleScope.launch {
-            travelOptionsViewModel.uiState.collect { state ->
-                when (state) {
-                    is TravelOptionState.Idle -> {
-                    }
-
-                    is TravelOptionState.Loading -> {
-                        binding.progressLoading.visibility = View.VISIBLE
-                    }
-
-                    is TravelOptionState.Success -> {
-                        binding.progressLoading.visibility = View.GONE
-                        //sharedViewModel.setRideEstimate(state.rideEstimate)
-                        Toast.makeText(
-                            requireContext(),
-                            state.rideConfirm,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        //findNavController().navigate(R.id.action_travelRequestFragment_to_travelOptionsFragment)
-                    }
-
-                    is TravelOptionState.Error -> {
-                        binding.progressLoading.visibility = View.GONE
-                        val errorMessage = state.resId
-                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT)
-                            .show()
-                    }
+        travelOptionsViewModel.uiState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is TravelOptionState.Loading -> {
+                    binding.progressLoading.visibility = View.VISIBLE
                 }
+
+                is TravelOptionState.Success -> {
+                    binding.progressLoading.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        state.rideConfirm,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    findNavController().navigate(R.id.action_OptionsFragment_to_HistoryFragment)
+                }
+
+                is TravelOptionState.Error -> {
+                    binding.progressLoading.visibility = View.GONE
+                    val errorMessage = state.resId
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {}
             }
         }
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

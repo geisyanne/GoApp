@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geisyanne.goapp.databinding.ItemRvTravelOptionsBinding
 import com.geisyanne.goapp.domain.model.RideOptionModel
+import com.geisyanne.goapp.util.formatToBRL
+import com.geisyanne.goapp.util.setDebouncedOnClickListener
 
 class TravelOptionsAdapter(
     private val onItemClick: (RideOptionModel) -> Unit
@@ -37,9 +39,9 @@ class TravelOptionsAdapter(
                 binding.txtDescItemOptions.text = rideOption.description
                 binding.txtVehicleItemOptions.text = rideOption.vehicle
                 binding.txtRatingItemOptions.text = rideOption.review?.rating.toString()
-                binding.txtValueItemOptions.text = rideOption.value.toString()
+                binding.txtValueItemOptions.text = rideOption.value?.formatToBRL()
 
-                binding.btnChooseItemOptions.setOnClickListener {
+                binding.btnChooseItemOptions.setDebouncedOnClickListener {
                     onItemClick(rideOption)
                 }
             }

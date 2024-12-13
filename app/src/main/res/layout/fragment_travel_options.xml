@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
-    <!-- Substituindo o MapView por uma View (placeholder) -->
-    <FrameLayout
-        android:id="@+id/map_view_options"
+    <ImageView
+        android:id="@+id/img_map_options"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:background="@android:color/darker_gray"
+        android:layout_height="270dp"
+        android:layout_marginBottom="40dp"
+        android:scaleType="center"
+        android:contentDescription="@string/static_map_description"
+        app:layout_constraintBottom_toTopOf="@+id/rv_ride_options"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Título para a seção de motoristas -->
     <TextView
         android:id="@+id/txt_title_options"
         android:layout_width="wrap_content"
@@ -25,9 +26,8 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map_view_options" />
+        app:layout_constraintTop_toBottomOf="@id/img_map_options" />
 
-    <!-- RecyclerView para listar os motoristas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ride_options"
         android:layout_width="0dp"
@@ -36,31 +36,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_title_options"
-        tools:listitem="@layout/item_rv_travel_options"  />
+        tools:listitem="@layout/item_rv_travel_options" />
 
     <TextView
         android:id="@+id/txt_empty_list_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty_list_options"
-        android:visibility="gone"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="@id/rv_ride_options"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rv_ride_options"
+        tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progressLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/rv_ride_options"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rv_ride_options"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

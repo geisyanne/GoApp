@@ -2,21 +2,24 @@ package com.geisyanne.goapp.data.repository
 
 import com.geisyanne.goapp.data.api.ApiService
 import com.geisyanne.goapp.data.mapper.toDomain
-import com.geisyanne.goapp.data.request.RideEstimateRequest
-import com.geisyanne.goapp.data.response.RideEstimateResponse
-import com.geisyanne.goapp.domain.model.RideEstimateModel
-import com.geisyanne.goapp.domain.repository.RideEstimateRepository
+import com.geisyanne.goapp.data.response.RideHistoryResponse
+import com.geisyanne.goapp.domain.model.RideHistoryModel
+import com.geisyanne.goapp.domain.repository.RideHistoryRepository
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.gson.Gson
 import retrofit2.Response
 
-class RideEstimateRepositoryImpl(
+class RideHistoryRepositoryImpl(
     private val apiService: ApiService
-) : RideEstimateRepository {
+) : RideHistoryRepository {
 
-    override suspend fun getRideEstimate(request: RideEstimateRequest): Result<RideEstimateModel> {
+    override suspend fun getRideHistory(
+        customerId: String,
+        driverId: Int?
+    ): Result<RideHistoryModel> {
+
         return try {
-            val response = apiService.getRideEstimate(request)
+            val response = apiService.getRideHistory(customerId, driverId)
 
             if (response.isSuccessful) {
                 val body = response.body()?.toDomain()
@@ -35,13 +38,14 @@ class RideEstimateRepositoryImpl(
         }
     }
 
-    private fun handleHttpError(response: Response<RideEstimateResponse>): String {
+    private fun handleHttpError(response: Response<RideHistoryResponse>): String {
         return try {
-            if (response.code() == 400) {
+            if (response.code() == 400 || response.code() == 404) {
                 val errorJson = response.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorJson, ErrorResponse::class.java)
 
-                val errorMessage = "Código de erro: ${errorResponse.error_code}, Descrição: ${errorResponse.error_description}"
+                val errorMessage =
+                    "Código de erro: ${errorResponse.error_code}, Descrição: ${errorResponse.error_description}"
                 FirebaseCrashlytics.getInstance().log(errorMessage)
 
                 errorResponse.error_description
@@ -58,4 +62,5 @@ class RideEstimateRepositoryImpl(
         val error_code: String,
         val error_description: String
     )
+
 }

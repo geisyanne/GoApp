@@ -2,22 +2,21 @@ package com.geisyanne.goapp.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.geisyanne.goapp.domain.model.TravelRequestData
+import com.geisyanne.goapp.domain.model.InputDataModel
 import com.geisyanne.goapp.domain.usecase.RideEstimateResult
+import com.geisyanne.goapp.util.SingleLiveEvent
 
 class SharedViewModel : ViewModel() {
 
-    private val _rideEstimate = MutableLiveData<RideEstimateResult?>()
+    private val _rideEstimate = SingleLiveEvent<RideEstimateResult?>()
     val rideEstimate: LiveData<RideEstimateResult?> get() = _rideEstimate
 
-    private val _travelRequestData = MutableLiveData<TravelRequestData?>()
-    val travelRequestData: LiveData<TravelRequestData?> get() = _travelRequestData
+    private val _travelRequestData = SingleLiveEvent<InputDataModel?>()
+    val travelRequestData: LiveData<InputDataModel?> get() = _travelRequestData
 
     fun setRideEstimate(result: RideEstimateResult) {
         _rideEstimate.value = result
-        Log.d("SharedViewModel", "RideEstimate set to: $result")
     }
 
     fun clearRideEstimate() {
@@ -29,13 +28,12 @@ class SharedViewModel : ViewModel() {
     }
 
     fun setTravelRequestData(customerId: String, origin: String, destination: String) {
-        _travelRequestData.value = TravelRequestData(customerId, origin, destination)
+        _travelRequestData.value = InputDataModel(customerId, origin, destination)
     }
 
-    fun getTravelRequestData(): TravelRequestData? {
+    fun getTravelRequestData(): InputDataModel? {
         return _travelRequestData.value
     }
-
 
 }
 

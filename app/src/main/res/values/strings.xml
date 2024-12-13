@@ -1,25 +1,33 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">GoApp</string>
 
+    <!-- Hints -->
     <string name="hint_name">ID do cliente</string>
     <string name="hint_origin_address">Endereço de origem</string>
     <string name="hint_destination_address">Endereço de destino</string>
 
+    <!-- Errors -->
     <string name="error_origin_not_provided">Informe o endereço de origem</string>
     <string name="error_destination_not_provided">Informe o endereço de destino</string>
     <string name="error_customer_id_not_provided">Informe o ID do cliente</string>
     <string name="error_destination_equals_origin">O endereço de destino está igual ao de origem</string>
-
     <string name="error_server">Problema ao se conectar com o servidor. Tente novamente.</string>
     <string name="error_network">Sem conexão com a internet. Verifique sua rede.</string>
     <string name="error_invalid_response">Resposta inválida do servidor. Tente novamente.</string>
-
     <string name="error_generic">Ocorreu um erro. Por favor, tente novamente.</string>
 
+    <!-- Ride Messages -->
+    <string name="ride_confirm">Viagem confirmada!</string>
     <string name="choose_trip">Escolha a viagem</string>
     <string name="empty_list_options">Nenhum motorista disponível agora.\nTente novamente em breve!</string>
-    <string name="ride_confirm">Viagem Confirmada</string>
+    <string name="empty_list_ride">Nenhum registro</string>
     <string name="search_ride">Procurar motorista</string>
+    <string name="select_driver">Selecione o motorista</string>
 
+    <!-- Map Description -->
+    <string name="static_map_description">Mapa estático com a rota escolhida</string>
 
+    <!-- API Key -->
+    <string name="maps_api_key">AIzaSyA-Cy2vFUyv7ZLCPr0ny-ZDDzid9KKePoA</string>
 </resources>

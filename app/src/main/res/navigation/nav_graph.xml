@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/travelRequestFragment">
 
     <fragment
         android:id="@+id/travelRequestFragment"
         android:name="com.geisyanne.goapp.ui.features.travelRequest.TravelRequestFragment"
-        android:label="Solicitação de Viagem">
+        android:label="TravelRequestFragment"
+        tools:layout="@layout/fragment_travel_request">
         <action
-            android:id="@+id/action_travelRequestFragment_to_travelOptionsFragment"
+            android:id="@+id/action_RequestFragment_to_OptionsFragment"
             app:destination="@id/travelOptionsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/travelOptionsFragment"
         android:name="com.geisyanne.goapp.ui.features.travelOptions.TravelOptionsFragment"
-        android:label="Detalhes da Viagem">
+        android:label="TravelOptionsFragment"
+        tools:layout="@layout/fragment_travel_options">
+        <action
+            android:id="@+id/action_OptionsFragment_to_HistoryFragment"
+            app:destination="@id/travelHistoryFragment" />
+        <action
+            android:id="@+id/action_OptionsFragment_to_RequestFragment"
+            app:destination="@id/travelRequestFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/travelHistoryFragment"
+        android:name="com.geisyanne.goapp.ui.features.travelHistory.TravelHistoryFragment"
+        android:label="TravelHistoryFragment"
+        tools:layout="@layout/fragment_travel_history" >
+        <action
+            android:id="@+id/action_HistoryFragment_to_OptionsFragment3"
+            app:destination="@id/travelOptionsFragment" />
+    </fragment>
 
 
 </navigation>
